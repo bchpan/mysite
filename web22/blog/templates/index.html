@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>test page</title>
+        <style type="text/css">
+        </style>
+        <script type="text/javascript" src="{{STATIC_URL}}js/jquery.js">
+        </script>
+        <script>
+        $(document).ready(function(){
+            var sum = 0;
+            $('button').click(function (){
+                //alert($(this).attr('bookname'));
+                var msg = $('#buyBooks').html()
+                $('#buyBooks').html(msg + "<h3>"+ $(this).attr('bookname')+"</h3>");
+                var price = parseFloat($(this).attr('bookprice'));
+                sum += price;
+                //alert(sum);
+                $('#sum').html(sum);
+            });
+        });
+        </script>
+    </head>
+    <body>
+    <div id="buyBooks">
+    <h1>已购图书：</h1>
+    </div>
+    <div>
+     <h1>总计：<span id="sum"></span></h1>
+    </div>
+    <hr />
+    <div>
+    {%for book in book_list%}
+    <div>
+        <h5>{{book.name}}</h5>
+        <h5>{{book.price}}</h5>
+        <button bookprice="{{book.price}}" bookname="{{book.name}}">购买</button>
+        <hr />
+    </div>
+    {%endfor%}
+    </div>
+    <div>
+    {%for category in first_book_category_list%}
+    <li>{{category.category}}</li>
+        <blockquote>
+            {%for s_category in category.bookcategory_set.all%}
+                <li><a href="">{{s_category.category}}</a></li>
+            {%endfor%}
+        </blockquote>
+    {%endfor%}
+    </div>
+    </body>
+</html>
