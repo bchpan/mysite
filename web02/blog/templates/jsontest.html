@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>test page</title>
+        <style type="text/css">
+        </style>
+        <script type="text/javascript" src="{{STATIC_URL}}js/jquery.js">
+        </script>
+        <script type="text/javascript">
+        $(document).ready(function (){
+            
+            var users = [
+            {%for u in request.session.users%}
+            {'uname':u.uanme},
+            {%endfor%}
+            ];
+            $(btn1).click(function (){
+                var p1 ={"uname":$("#uname").val() };
+                users.push(p1)
+                var users_upload = JSON.stringify(users);
+                $.post("",{"users":users_upload}, function(data,status){$('#msg').html(data+" "+status)});
+            });
+        });
+        </script>
+    </head>
+    <body>
+        <hr />
+        <div>{%for i in request.session.users%}<li>{{i.uname}}</li>{%endfor%}</div>
+        <hr />
+    <div id="msg">
+    </div>    
+    <form method="post" >
+    {%csrf_token%}
+    <input type="text" name="uname" id="uname" > <input type="button" id="btn1" value="ok" />
+    </body>
+</html>
