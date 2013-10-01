@@ -1,5 +1,4 @@
 from django.db import models
-form django.contrib import User
 
 
 class BookCategory(models.Model):
