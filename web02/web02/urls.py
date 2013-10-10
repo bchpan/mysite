@@ -20,3 +20,8 @@ urlpatterns += patterns('',
     url(r'^jsontest/$', 'blog.views.jsontest'),
     url(r'^jsontest1/$', 'blog.views.jsontest1'),
 )
+
+urlpatterns += patterns('',
+    url(r'^myurl/$', 'blog.views.myurl'),
+    url(r'^urltest/$', 'blog.views.urltest', name="urltest"),
+)

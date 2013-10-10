@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 import simplejson
-
+from django.core.urlresolvers import reverse
 
 
 def jsontest(req):
@@ -24,3 +24,12 @@ def jsontest1(req):
     jobs = req.session['jobs']
     print req.session['jobs']
     return render(req, "jsontest1.html", {'jobs':jobs})
+
+
+def myurl(req):
+    print reverse('urltest')
+    return render(req, 'myurl.html', {})
+
+
+def urltest(req):
+    pass
