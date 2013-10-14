@@ -25,7 +25,13 @@ class BaseHandler(tornado.web.RequestHandler):
     def db(self):
         return self.application.db
 
-
+class BlogIndexHandler(BaseHandler):
+    def get(self):
+        blogs_id_list = self.db.lrange('blogs:list', 0, -1)
+        blogs = []
+        for blog_id in blog_id_list :
+            blogs.append(self.db.hgetall('blog:%s'%blog_id))
+        self.render('06/index.html')
 
 class BlogAddHandler(BaseHandler):
     def get(self):
